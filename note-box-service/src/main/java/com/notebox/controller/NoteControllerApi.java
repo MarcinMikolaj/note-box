@@ -1,5 +1,6 @@
 package com.notebox.controller;
 
+import com.notebox.infrastructure.validation.NoteContent;
 import com.notebox.infrastructure.validation.NoteTitle;
 import com.notebox.model.Note;
 import org.springframework.http.MediaType;
@@ -14,11 +15,11 @@ import java.util.List;
 public interface NoteControllerApi {
     @PostMapping("/create")
     ResponseEntity<Note> createNote(@RequestParam @NoteTitle String title,
-                                    @RequestParam String content);
+                                    @RequestParam @NoteContent String content);
     @PutMapping("/update")
     ResponseEntity<Note> updateNote(@RequestParam Long id,
-                                    @RequestParam String title,
-                                    @RequestParam String content);
+                                    @RequestParam @NoteTitle String title,
+                                    @RequestParam @NoteContent String content);
     @DeleteMapping("/delete")
     ResponseEntity<Long> deleteNote(@RequestParam Long id);
 
