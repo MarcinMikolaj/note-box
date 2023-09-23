@@ -1,5 +1,6 @@
 package com.notebox.service.impl;
 
+import com.notebox.dto.NoteDto;
 import com.notebox.model.Note;
 import com.notebox.repository.NoteRepository;
 import com.notebox.service.NoteService;
@@ -15,20 +16,20 @@ public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;
 
     @Override
-    public Note createNote(String title, String content) {
+    public Note createNote(NoteDto noteDto) {
         return noteRepository.save(Note.builder()
-                .title(title)
-                .content(content)
+                .title(noteDto.title())
+                .content(noteDto.content())
                 .date(LocalDateTime.now())
                 .build());
     }
 
     @Override
-    public Note updateNote(Long id, String title, String content) {
+    public Note updateNote(NoteDto noteDto) {
         return noteRepository.save(Note.builder()
-                .id(id)
-                .title(title)
-                .content(content)
+                .id(noteDto.id())
+                .title(noteDto.title())
+                .content(noteDto.content())
                 .date(LocalDateTime.now())
                 .build());
     }

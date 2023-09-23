@@ -1,6 +1,8 @@
 package integr;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.notebox.NoteBoxServiceApplication;
+import com.notebox.dto.NoteDto;
 import com.notebox.repository.NoteRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -31,18 +33,20 @@ class NoteControllerIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private NoteRepository noteRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void createNoteShouldReturnNoteWithCreatedStatus() throws Exception {
         // given
         String title = "example";
         String content = "This is example note content";
+        NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
         mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
                 .contentType(MediaType.APPLICATION_JSON)
-                        .param("title", title)
-                        .param("content", content))
+                        .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(jsonPath("$.title").value(title))
                 .andExpect(jsonPath("$.content").value(content))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -55,12 +59,12 @@ class NoteControllerIntegrationTest {
         // given
         String title = "az12345Z";
         String content = "This is example note content";
+        NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
         mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("title", title)
-                        .param("content", content))
+                        .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
@@ -70,12 +74,12 @@ class NoteControllerIntegrationTest {
         // given
         String title = "example";
         String content = "This is e@xample not#e content with special $ characters";
+        NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
         mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("title", title)
-                        .param("content", content))
+                        .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
@@ -85,13 +89,12 @@ class NoteControllerIntegrationTest {
         // given
         String title = "updatedTitle";
         String content = "example updated content";
+        NoteDto noteDto = new NoteDto(102L, title, content);
 
         // when,then
         mockMvc.perform(put("http://localhost:6000/v1/api/note/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("id", String.valueOf(102))
-                        .param("title", title)
-                        .param("content", content))
+                        .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(102))
                 .andExpect(jsonPath("$.title").value(title))
