@@ -1,2 +1,37 @@
 server:
-  port: 6000
+  port: 9000
+spring:
+  profiles:
+    default: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost/notebox-db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin123
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://dbpostgresql:5432/notebox-db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin123
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create

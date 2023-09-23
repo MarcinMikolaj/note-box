@@ -9,11 +9,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.PARAMETER})
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Constraint(validatedBy = NoteTitleValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NoteTitle {
-    String message() default "Not allowed title";
+    String message() default "Not allowed title (title shouldn't contain special characters and numbers)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
 }

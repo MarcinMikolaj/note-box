@@ -1,6 +1,7 @@
 package com.notebox.controller.impl;
 
 import com.notebox.controller.NoteControllerApi;
+import com.notebox.dto.NoteDto;
 import com.notebox.model.Note;
 import com.notebox.service.NoteService;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,15 @@ public class NoteController implements NoteControllerApi {
     private final NoteService noteService;
 
     @Override
-    public ResponseEntity<Note> createNote(String title, String content) {
-        log.info("Received request to create note title: {} content: {}", title, content);
-        return ResponseEntity.status(HttpStatus.CREATED).body(noteService.createNote(title, content));
+    public ResponseEntity<Note> createNote(NoteDto noteDto) {
+        log.info("Received request to create noteDto: {}", noteDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(noteService.createNote(noteDto));
     }
 
     @Override
-    public ResponseEntity<Note> updateNote(Long id, String title, String content) {
-        log.info("Received request to update note id: {} title: {} content: {}", id, title, content);
-        return ResponseEntity.status(HttpStatus.OK).body(noteService.updateNote(id, title, content));
+    public ResponseEntity<Note> updateNote(NoteDto noteDto) {
+        log.info("Received request to update noteDto: {}", noteDto);
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.updateNote(noteDto));
     }
 
     @Override
