@@ -11,7 +11,6 @@ import java.util.List;
 
 @RequestMapping(path="/v1/api/note", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface NoteControllerApi {
-
     @PostMapping("/create")
     ResponseEntity<Note> createNote(@Valid @RequestBody NoteDto noteDto);
 
