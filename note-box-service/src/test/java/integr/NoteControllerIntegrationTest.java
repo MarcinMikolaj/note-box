@@ -44,7 +44,7 @@ class NoteControllerIntegrationTest {
         NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
-        mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
+        mockMvc.perform(post("http://localhost:9000/v1/api/note/create")
                 .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(jsonPath("$.title").value(title))
@@ -62,7 +62,7 @@ class NoteControllerIntegrationTest {
         NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
-        mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
+        mockMvc.perform(post("http://localhost:9000/v1/api/note/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -77,7 +77,7 @@ class NoteControllerIntegrationTest {
         NoteDto noteDto = new NoteDto(null, title, content);
 
         // when,then
-        mockMvc.perform(post("http://localhost:6000/v1/api/note/create")
+        mockMvc.perform(post("http://localhost:9000/v1/api/note/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -92,7 +92,7 @@ class NoteControllerIntegrationTest {
         NoteDto noteDto = new NoteDto(102L, title, content);
 
         // when,then
-        mockMvc.perform(put("http://localhost:6000/v1/api/note/update")
+        mockMvc.perform(put("http://localhost:9000/v1/api/note/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -107,7 +107,7 @@ class NoteControllerIntegrationTest {
     @Test
     void deleteNoteShouldRemoveNoteFromDataBase() throws Exception {
         // given, when,then
-        mockMvc.perform(delete("http://localhost:6000/v1/api/note/delete")
+        mockMvc.perform(delete("http://localhost:9000/v1/api/note/delete")
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("id", String.valueOf(4)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -118,7 +118,7 @@ class NoteControllerIntegrationTest {
     @Test
     void getAllNotesShouldReturnFiveRecordsFromDataBase() throws Exception {
         // given, when, then
-        mockMvc.perform(get("http://localhost:6000/v1/api/note/get/all")
+        mockMvc.perform(get("http://localhost:9000/v1/api/note/get/all")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -131,7 +131,7 @@ class NoteControllerIntegrationTest {
         String title = "DEV";
 
         // when, then
-        mockMvc.perform(get("http://localhost:6000/v1/api/note/get/by/title")
+        mockMvc.perform(get("http://localhost:9000/v1/api/note/get/by/title")
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("title", title))
                 .andExpect(status().isOk())

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = NoteContentValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NoteContent {
-    String message() default "Not allowed content";
+    String message() default "Not allowed content (content shouldn't contain special characters)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
 }

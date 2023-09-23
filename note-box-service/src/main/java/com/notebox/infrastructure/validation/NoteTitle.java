@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = NoteTitleValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NoteTitle {
-    String message() default "Not allowed title";
+    String message() default "Not allowed title (title shouldn't contain special characters and numbers)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
 }

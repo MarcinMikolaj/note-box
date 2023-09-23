@@ -4,7 +4,7 @@ services:
     container_name: note-box-service
     build: ./note-box-service
     ports:
-      - "6000:6000"
+      - "9000:9000"
     depends_on:
       - dbpostgresql
   dbpostgresql:
