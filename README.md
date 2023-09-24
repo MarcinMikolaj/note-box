@@ -11,7 +11,7 @@
 - [Contact](#contact)
 
 ## General info
-Application to manage and store your notes.
+Simple CRUD application to manage and store your notes.
 
 ## Technologies
 * Java 17
@@ -19,6 +19,7 @@ Application to manage and store your notes.
 * Postgres
 * Lombok
 * Swagger
+* MapStruct
 * JUnit5
 * Mockito
 
@@ -28,7 +29,7 @@ Application to manage and store your notes.
 ## Functional and non-functional requirements
 
 ### The non-functional requirements that have been set for the application include:
-- Project should be based on Java 17
+
 
 ### The functional requirements that have been set for the application include:
 
@@ -54,12 +55,26 @@ The project has been completed, all functional and non-functional requirements h
 
 ## Setup
 
+### Project dowload
 1. Open this URL https://github.com/MarcinMikolaj/note-box
 2. Now we must find the green rectangle where it writes „<>CODE”
 3. We select HTTPS and there is a link below that you need to copy
 4. The next step is to open IntelliJ And choose File > New > Project from Version Control
 5. Then we need to paste our URL from Github, select the path to our project on our PC, and click Clone.
 6. Enjoy our Project! 😄
+
+### Run with Docker
+
+To run the project with a docker profile, the application file should be built with the `maven clean install` command. Once the artifact is prepared and located under `/target` directory, then the `docker-compose up --build` could be executed. The app should be available under the URL configured in the docker-compose file (port 9000 same as for dev profile).
+
+### Run localy
+If you want to run the app locally then it's required to have PostreSQL database installed.
+PostgreSQL installation (should be not modified, meaning the default config should be selected):
+
+1. Download the installation package from Installation package - please choose according to the operation system.
+2. Go through the installation steps.
+3. Please remember that the password provided on the 'Password' screen would be used in the application properties. If u'll choose admin123 then there'll be NO need to change dev app config. REMEMBER THE PROVIDED PASSWORD if u would decide to choose different one!
+4. Now when your database is reade you can user PgAdmin or for example DBeaver to create Database where we will storage our tables.
 
 ## Resources
 
